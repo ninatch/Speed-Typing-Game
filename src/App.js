@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { GlobalStyles } from './styles/Global';
+import Input from './components/Input'
 
 function App() {
+
+  const [count, setCount] = useState(5)
+
+  function countdown() {
+    let myInterval = setInterval(() => {
+      setCount((prevCount) => {
+        if(count === 0){
+          clearInterval(myInterval)
+        } else {
+          return prevCount - 1
+        }
+      }
+    )}, 1000)
+  }
+
+  console.log(count)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <GlobalStyles />
+      <h1>Speed Typing Game</h1>
+      <p>{count}</p>
+      <Input />
+      <button onClick={countdown}>Start</button>
     </div>
   );
 }

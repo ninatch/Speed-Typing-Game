@@ -9,14 +9,15 @@ const Input = ({isDisabled, collectData}) => {
         setInput(event.target.value)
     }
     
-    useEffect(() => {
-        countWords()
-    }, [input])
-    
     const countWords = () => {
         const numOfWords = input.split(' ')
         collectData(numOfWords)
     }
+    
+    useEffect(() => {
+        countWords()
+    }, [input])
+    
 
     return (
         <StyledInput 

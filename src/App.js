@@ -5,16 +5,16 @@ import useFocus from './utils/useFocus';
 
 function App() {
   
-  const [timeRemaining, setTimeRemaining] = useState(10)
+  const [timeRemaining, setTimeRemaining] = useState(3)
   const [isDisabled, setIsDisabled] = useState(true)
   const [isHidden, setIsHidden] = useState(false)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
+  const [receivedData, setReceivedData] = useState('')
   const [inputRef, setInputFocus] = useFocus()
 
   const collectData = (data) => {
-    const numOfWords = data.split(' ')
-    console.log(numOfWords)
-    // console.log(data)
+    setReceivedData(data)
+    console.log(receivedData)
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
 
   const startGame = () => {
     setIsTimeRunning(true)
-    setTimeRemaining(10)
+    setTimeRemaining(3)
     enableOrDisable()
     showOrHide()
     setInputFocus()

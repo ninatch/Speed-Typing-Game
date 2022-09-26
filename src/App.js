@@ -43,7 +43,7 @@ function App() {
   const startGame = () => {
     setIsTimeRunning(true)
     setIsWordCountDisplayed(false)
-    setTimeRemaining(3)
+    setTimeRemaining(10)
     Promise.resolve(enableOrDisable())
       .then(setInputFocus)
     showOrHide()

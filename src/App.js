@@ -1,14 +1,15 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { GlobalStyles } from './styles/Global';
 import Input from './components/Input'
 import useFocus from './utils/useFocus';
 
 function App() {
   
-  const [timeRemaining, setTimeRemaining] = useState(3)
+  const [timeRemaining, setTimeRemaining] = useState(10)
   const [isDisabled, setIsDisabled] = useState(true)
   const [isHidden, setIsHidden] = useState(false)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
+  const [isWordCountDisplayed, setIsWordCountDisplayed] = useState(false)
   const [receivedData, setReceivedData] = useState('')
   const [inputRef, setInputFocus] = useFocus()
 
@@ -41,13 +42,16 @@ function App() {
 
   const startGame = () => {
     setIsTimeRunning(true)
+    setIsWordCountDisplayed(false)
     setTimeRemaining(3)
-    enableOrDisable()
+    Promise.resolve(enableOrDisable())
+      .then(setInputFocus)
     showOrHide()
     setInputFocus()
   }
 
   const endGame = () => {
+    setIsWordCountDisplayed(true)
     enableOrDisable()
     showOrHide()
     collectData()
@@ -58,7 +62,8 @@ function App() {
       <GlobalStyles />
       <h2>How many words can you type in 10 seconds?</h2>
       <p>Remaining time: {timeRemaining}</p>
-      <Input isDisabled={isDisabled} ref={inputRef} collectData={collectData}/>
+      {isWordCountDisplayed && <p>You've typed {receivedData} words!</p>}
+      <Input isDisabled={isDisabled} focusRef={inputRef} collectData={collectData}/>
       <button onClick={startGame} hidden={isHidden}>Start</button>
     </div>
   )

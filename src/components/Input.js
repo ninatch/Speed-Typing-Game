@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyledInput } from '../styles/components/Input.styled'
 
-const Input = ({isDisabled, collectData}) => {
+const Input = ({isDisabled, collectData, focusRef}) => {
 
     const [input, setInput] = useState('')
 
@@ -10,7 +10,7 @@ const Input = ({isDisabled, collectData}) => {
     }
     
     const countWords = () => {
-        const numOfWords = input.split(' ')
+        const numOfWords = input.split(' ').length
         collectData(numOfWords)
     }
     
@@ -18,7 +18,6 @@ const Input = ({isDisabled, collectData}) => {
         countWords()
     }, [input])
     
-
     return (
         <StyledInput 
             type='text' 
@@ -26,6 +25,7 @@ const Input = ({isDisabled, collectData}) => {
             value={input} 
             onChange={handleChange} 
             disabled={isDisabled}
+            ref={focusRef}
         >
         </StyledInput>
     )

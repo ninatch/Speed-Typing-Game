@@ -21,7 +21,6 @@ export const GlobalStyles = createGlobalStyle`
         margin: 2rem;
         width: 8rem;
         height: 2rem;
-        border-radius: 2rem;
     }
 
     .container {
